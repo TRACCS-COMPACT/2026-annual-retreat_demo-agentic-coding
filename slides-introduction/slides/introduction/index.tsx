@@ -23,6 +23,10 @@ const SKY = '#b8e0f0';
 const TINT = '#eaf3f8';
 const INK = '#0a0a0a';
 const LINE = '#e5e5ea';
+// Secondary accent — marks the "verification stays human" thread running through the talk
+// (Llm closing line, Agent's supervision note, Workflow's REVUE step, Guardrails, Deroule
+// phase 2, Retenir #1). Kept out of everything else so it stays a legible signal, not decoration.
+const PURPLE = '#6b3fa0';
 const MONO = '"SF Mono", SFMono-Regular, Menlo, Consolas, monospace';
 
 const EASE_OUT = 'cubic-bezier(0, 0, 0.2, 1)';
@@ -242,24 +246,35 @@ const CodeLine = ({
   </div>
 );
 
-const PhaseBox = ({ title, desc }: { title: string; desc: string }) => (
-  <div
-    style={{
-      flex: 1,
-      background: TINT,
-      border: `1px solid ${LINE}`,
-      borderTop: '4px solid var(--osd-accent)',
-      padding: '20px 28px',
-    }}
-  >
-    <div style={{ fontFamily: MONO, fontSize: 30, fontWeight: 600, color: INK }}>
-      {title}
+const PhaseBox = ({
+  title,
+  desc,
+  tone = 'accent',
+}: {
+  title: string;
+  desc: string;
+  tone?: 'accent' | 'human';
+}) => {
+  const barColor = tone === 'human' ? PURPLE : 'var(--osd-accent)';
+  return (
+    <div
+      style={{
+        flex: 1,
+        background: TINT,
+        border: `1px solid ${LINE}`,
+        borderTop: `4px solid ${barColor}`,
+        padding: '20px 28px',
+      }}
+    >
+      <div style={{ fontFamily: MONO, fontSize: 30, fontWeight: 600, color: tone === 'human' ? PURPLE : INK }}>
+        {title}
+      </div>
+      <div style={{ fontSize: 22, lineHeight: 1.4, color: MUTED, marginTop: 10 }}>
+        {desc}
+      </div>
     </div>
-    <div style={{ fontSize: 22, lineHeight: 1.4, color: MUTED, marginTop: 10 }}>
-      {desc}
-    </div>
-  </div>
-);
+  );
+};
 
 const LevelBox = ({ n, label }: { n: string; label: string }) => (
   <div
@@ -278,7 +293,7 @@ const LevelBox = ({ n, label }: { n: string; label: string }) => (
   </div>
 );
 
-const NumRow = ({ n, children }: { n: string; children: string }) => (
+const NumRow = ({ n, children }: { n: string; children: ReactNode }) => (
   <div
     style={{
       display: 'flex',
@@ -476,7 +491,7 @@ const Llm: Page = () => (
         marginTop: 56,
         fontSize: 34,
         fontWeight: 500,
-        color: 'var(--osd-accent)',
+        color: PURPLE,
       }}
     >
       D'où la règle : la vérification reste humaine.
@@ -530,7 +545,10 @@ const Agent: Page = () => (
                   L'agent agit
                 </div>
                 <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 10 }}>
-                  il écrit, exécute, itère — vous gardez la supervision
+                  il écrit, exécute, itère —{' '}
+                  <strong style={{ color: PURPLE, fontWeight: 600 }}>
+                    vous gardez la supervision
+                  </strong>
                 </div>
               </div>
             </div>
@@ -547,7 +565,6 @@ const EnPratique: Page = () => (
     <TopBar label="04 — En pratique" />
     <Heading>Deux ingrédients : un modèle, un harnais</Heading>
     <div style={{ display: 'flex', gap: 96, marginTop: 56, alignItems: 'flex-start' }}>
-      {/* @slide-comment id="c-1f576b15" ts="2026-10-02T05:09:31.823Z" text="eyJub3RlIjoicmVtb3ZlIGNvbnRvdXJpbmcgbGluZSJ9" */}
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 36 }}>
         <Block label="L'accès aux modèles">
           <Item>API / SDK + clé d'API</Item>
@@ -568,7 +585,7 @@ const EnPratique: Page = () => (
       <img
         src={opencodeShot}
         alt="OpenCode (TUI)"
-        style={{ width: 620, height: 'auto', border: `1px solid ${LINE}` }}
+        style={{ width: 620, height: 'auto' }}
       />
     </div>
     <Footer />
@@ -579,7 +596,7 @@ const Contexte: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="05 — Gestion du contexte" />
     <Heading>Le contexte est la ressource critique</Heading>
-    <div style={{ display: 'flex', gap: 96, marginTop: 48, alignItems: 'flex-start' }}>
+    <div style={{ display: 'flex', gap: 96, marginTop: 40, alignItems: 'flex-start' }}>
       <div style={{ flex: 1 }}>
         <p
           style={{
@@ -591,7 +608,43 @@ const Contexte: Page = () => (
         >
           Du prompt engineering au context engineering — nourrissez-le, économisez-le.
         </p>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 28, marginTop: 44 }}>
+        <div style={{ marginTop: 32 }}>
+          <div
+            style={{
+              display: 'flex',
+              height: 28,
+              borderRadius: 6,
+              overflow: 'hidden',
+              border: `1px solid ${LINE}`,
+            }}
+          >
+            <div style={{ flex: 3, background: 'var(--osd-accent)' }} />
+            <div style={{ flex: 2, background: SKY }} />
+            <div style={{ flex: 5, background: TINT }} />
+          </div>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginTop: 10,
+              fontFamily: MONO,
+              fontSize: 20,
+              color: MUTED,
+            }}
+          >
+            <span>système + outils</span>
+            <span>historique</span>
+            <span>budget restant</span>
+          </div>
+          <p style={{ fontSize: 22, lineHeight: 1.4, color: MUTED, margin: '12px 0 0' }}>
+            Chaque appel consomme un{' '}
+            <strong style={{ color: 'var(--osd-accent)', fontWeight: 600 }}>
+              budget fixe de tokens
+            </strong>{' '}
+            — la fenêtre de contexte.
+          </p>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 28, marginTop: 32 }}>
           <div>
             <div style={{ fontSize: 30, fontWeight: 500 }}>Compaction</div>
             <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
@@ -660,11 +713,12 @@ const Workflow: Page = () => (
     <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginTop: 56 }}>
       <PhaseBox title="PLAN" desc="ce qu'il va faire, et comment" />
       <Arrow />
-      <PhaseBox title="REVUE" desc="vous relisez, vous ajustez" />
+      <PhaseBox title="REVUE" desc="vous relisez, vous ajustez" tone="human" />
       <Arrow />
       <PhaseBox title="BUILD" desc="il exécute, vous vérifiez" />
     </div>
     <div style={{ display: 'flex', gap: 96, marginTop: 56, alignItems: 'flex-start' }}>
+      {/* @slide-comment id="c-2be9c035" ts="2026-10-02T09:13:21.924Z" text="eyJub3RlIjoiVGhpcyBpbWFnZSBpcyBub3QgY29ycmVjdGx5IGRpc3BsYXllZC4ifQ" */}
       <div style={{ flex: 1 }}>
         <div style={{ fontFamily: MONO, fontSize: 30, color: INK }}>
           prompt <span style={{ color: 'var(--osd-accent)' }}>→</span> think{' '}
@@ -703,7 +757,7 @@ const Guardrails: Page = () => (
       <Check>Vérifier — lire le code, questionner le surprenant</Check>
       <Check>Tests — les exécuter avant de continuer</Check>
       <Check>Hygiène git — commits fréquents, diffs relus</Check>
-      <Check>Coûts — choisir le modèle juste, suivre la consommation</Check>
+      <Check>Coûts — choisir le plus petit modèle possible pour la tâche</Check>
       <Check>Permissions — lire avant d'approuver, jamais de secrets</Check>
     </div>
     <p
@@ -711,7 +765,7 @@ const Guardrails: Page = () => (
         fontSize: 48,
         fontWeight: 500,
         lineHeight: 1.4,
-        color: 'var(--osd-accent)',
+        color: PURPLE,
         margin: '56px 0 0',
       }}
     >
@@ -725,27 +779,47 @@ const Deroule: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="08 — Le programme" />
     <Heading>L'atelier — et après</Heading>
-    <div style={{ display: 'flex', gap: 20, marginTop: 56 }}>
+    <p style={{ fontSize: 28, lineHeight: 1.4, color: MUTED, margin: '20px 0 0', maxWidth: 1500 }}>
+      Deux temps de 60 minutes : atelier guidé, puis votre propre problème de développement.
+    </p>
+    <div
+      style={{
+        marginTop: 32,
+        fontSize: 24,
+        fontWeight: 500,
+        color: 'var(--osd-accent)',
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+      }}
+    >
+      Phase 1 · 60 min — Climat du Poët-Laval
+    </div>
+    <div style={{ display: 'flex', gap: 20, marginTop: 16 }}>
       <LevelBox n="N0" label="Données" />
       <LevelBox n="N1" label="Climat actuel" />
       <LevelBox n="N2" label="Tendance" />
       <LevelBox n="N3" label="Indicateur" />
       <LevelBox n="N4" label="Fiche" />
     </div>
-    <div
-      style={{
-        marginTop: 40,
-        fontSize: 32,
-        fontWeight: 500,
-        color: 'var(--osd-accent)',
-      }}
-    >
-      ★ Puis — votre vrai problème : 60 min, avec plans et AGENTS.md
-    </div>
-    <div style={{ marginTop: 40 }}>
+    <div style={{ marginTop: 24 }}>
       <Bullet>Une seule étape à la fois : demandez, puis lisez</Bullet>
       <Bullet>Lisez le code et le résultat avant de continuer</Bullet>
       <Bullet>Répondez aux questions de vérification de chaque niveau</Bullet>
+    </div>
+    <div
+      style={{
+        marginTop: 32,
+        fontSize: 24,
+        fontWeight: 500,
+        color: PURPLE,
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+      }}
+    >
+      Phase 2 · 60 min — Votre problème
+    </div>
+    <div style={{ marginTop: 16, fontSize: 30, fontWeight: 500 }}>
+      Votre vrai problème de développement, avec plans et AGENTS.md
     </div>
     <a
       href="https://github.com/TRACCS-COMPACT/poet-laval-climate"
@@ -753,10 +827,10 @@ const Deroule: Page = () => (
       rel="noreferrer"
       style={{
         fontFamily: MONO,
-        fontSize: 30,
+        fontSize: 28,
         color: 'var(--osd-accent)',
         textDecoration: 'none',
-        marginTop: 48,
+        marginTop: 36,
         display: 'inline-block',
       }}
     >
@@ -772,7 +846,8 @@ const Retenir: Page = () => (
     <Heading>Trois choses à retenir</Heading>
     <div style={{ marginTop: 40 }}>
       <NumRow n="01">
-        L'agent est un LLM dans une boucle — la vérification reste la vôtre
+        L'agent est un LLM dans une boucle —{' '}
+        <strong style={{ color: PURPLE, fontWeight: 600 }}>la vérification reste la vôtre</strong>
       </NumRow>
       <NumRow n="02">
         Le contexte est la ressource clé — nourrissez-le, économisez-le
@@ -781,7 +856,19 @@ const Retenir: Page = () => (
         Petites tâches, plan avant build, hygiène git — la discipline paie
       </NumRow>
     </div>
-    <div style={{ marginTop: 40 }}>
+    <div
+      style={{
+        marginTop: 32,
+        fontSize: 24,
+        fontWeight: 500,
+        color: 'var(--osd-accent)',
+        letterSpacing: '0.12em',
+        textTransform: 'uppercase',
+      }}
+    >
+      Ressources disponibles
+    </div>
+    <div style={{ marginTop: 12 }}>
       <LinkRow
         href="https://github.com/TRACCS-COMPACT/poet-laval-climate"
         title="poet-laval-climate"
