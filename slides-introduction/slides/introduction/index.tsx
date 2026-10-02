@@ -718,7 +718,6 @@ const Workflow: Page = () => (
       <PhaseBox title="BUILD" desc="il exécute, vous vérifiez" />
     </div>
     <div style={{ display: 'flex', gap: 96, marginTop: 56, alignItems: 'flex-start' }}>
-      {/* @slide-comment id="c-2be9c035" ts="2026-10-02T09:13:21.924Z" text="eyJub3RlIjoiVGhpcyBpbWFnZSBpcyBub3QgY29ycmVjdGx5IGRpc3BsYXllZC4ifQ" */}
       <div style={{ flex: 1 }}>
         <div style={{ fontFamily: MONO, fontSize: 30, color: INK }}>
           prompt <span style={{ color: 'var(--osd-accent)' }}>→</span> think{' '}
