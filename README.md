@@ -23,7 +23,6 @@ sur un problème guidé → **démarrer** sur un vrai problème de développemen
 - Atelier guidé : https://github.com/TRACCS-COMPACT/poet-laval-climate
 - Mise en place technique : [`SETUP.md`](./SETUP.md)
 - Ce dépôt : https://github.com/TRACCS-COMPACT/2026-annual-retreat_demo-agentic-coding
-- Projet PC5 COMPACT : https://pepr-traccs.fr/projet/pc5-compact/
 
 ## Organisation du dépôt
 
