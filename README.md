@@ -22,6 +22,7 @@ sur un problème guidé → **démarrer** sur un vrai problème de développemen
 
 - Atelier guidé : https://github.com/TRACCS-COMPACT/poet-laval-climate
 - Mise en place technique : [`SETUP.md`](./SETUP.md)
+- Environnement de secours (JupyterLab, rien à installer) : https://notebook-ige-ping.osug.fr/ — mot de passe envoyé par e-mail
 - Ce dépôt : https://github.com/TRACCS-COMPACT/2026-annual-retreat_demo-agentic-coding
 
 ## Organisation du dépôt

@@ -8,6 +8,9 @@
 > - **VS Code + Kilo Code** dans l'éditeur, si vous préférez un IDE → référent : **Jordi Bolibar**
 >
 > En cas de blocage, appelez le référent de votre option.
+>
+> Machine verrouillée ou installation impossible ? JupyterLab de secours :
+> https://notebook-ige-ping.osug.fr/ (mot de passe envoyé par e-mail).
 
 ---
 
