@@ -148,6 +148,46 @@ const RepoZone = ({ title, desc }: { title: string; desc: string }) => (
   </div>
 );
 
+const TitleSlide: Page = () => (
+  <div style={{ ...page, position: 'relative' }}>
+    <TopBar label="VIGNETTES FLASH — IA AGENTIQUE POUR LE CODE" />
+    <div
+      style={{
+        fontFamily: MONO,
+        fontSize: 26,
+        color: 'var(--osd-accent)',
+        letterSpacing: '0.14em',
+      }}
+    >
+      VIGNETTE 03 / 05
+    </div>
+    <h1
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 'var(--osd-size-hero)',
+        fontWeight: 500,
+        letterSpacing: '-0.02em',
+        lineHeight: 1.08,
+        margin: '28px 0 0',
+      }}
+    >
+      Git et agents
+    </h1>
+    <div
+      style={{
+        width: 96,
+        height: 4,
+        background: 'var(--osd-accent)',
+        margin: '48px 0 36px',
+      }}
+    />
+    <p style={{ fontSize: 38, lineHeight: 1.5, color: MUTED, margin: 0 }}>
+      Le dépôt est la maison de l'agent.
+    </p>
+    <Footer />
+  </div>
+);
+
 const Maison: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="VIGNETTE 03 — Git et agents" />
@@ -225,8 +265,8 @@ const Reflexes: Page = () => (
 );
 
 export const meta: SlideMeta = {
-  title: 'Vignette — Git et agents',
-  createdAt: '2026-10-02T05:13:58.387Z',
+  title: 'Vignette 03 — Git et agents',
+  createdAt: '2026-10-02T18:44:09.207Z',
 };
 
-export default [Maison, Reflexes] satisfies Page[];
+export default [TitleSlide, Maison, Reflexes] satisfies Page[];

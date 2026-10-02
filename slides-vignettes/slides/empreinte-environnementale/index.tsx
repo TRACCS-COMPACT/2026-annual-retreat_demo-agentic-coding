@@ -1,4 +1,5 @@
-import { ImagePlaceholder, Step, Steps, useSlidePageNumber } from '@open-slide/core';
+import { Step, Steps, useSlidePageNumber } from '@open-slide/core';
+import reportShot from './assets/footprint-report.png';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
 
 export const design: DesignSystem = {
@@ -170,6 +171,46 @@ const ToolCard = ({
   </div>
 );
 
+const TitleSlide: Page = () => (
+  <div style={{ ...page, position: 'relative' }}>
+    <TopBar label="VIGNETTES FLASH — IA AGENTIQUE POUR LE CODE" />
+    <div
+      style={{
+        fontFamily: MONO,
+        fontSize: 26,
+        color: 'var(--osd-accent)',
+        letterSpacing: '0.14em',
+      }}
+    >
+      VIGNETTE 02 / 05
+    </div>
+    <h1
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 'var(--osd-size-hero)',
+        fontWeight: 500,
+        letterSpacing: '-0.02em',
+        lineHeight: 1.08,
+        margin: '28px 0 0',
+      }}
+    >
+      Empreinte environnementale
+    </h1>
+    <div
+      style={{
+        width: 96,
+        height: 4,
+        background: 'var(--osd-accent)',
+        margin: '48px 0 36px',
+      }}
+    />
+    <p style={{ fontSize: 38, lineHeight: 1.5, color: MUTED, margin: 0 }}>
+      Mesurer, c'est déjà optimiser.
+    </p>
+    <Footer />
+  </div>
+);
+
 const Pourquoi: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="VIGNETTE 02 — Empreinte environnementale" />
@@ -191,7 +232,7 @@ const Pourquoi: Page = () => (
         <Bullet>Les boucles, outils et relectures multiplient les tokens consommés</Bullet>
       </Step>
       <Step>
-        <Bullet>Énergie, gaz à effet de serre, eau : tout se mesure</Bullet>
+        <Bullet>Impact : énergie, CO2, eau, matériaux — tout se mesure</Bullet>
       </Step>
       <Step>
         <Bullet>Le choix du modèle est le premier levier (voir vignette 01)</Bullet>
@@ -225,7 +266,7 @@ const Comparer: Page = () => (
         color: 'var(--osd-accent)',
       }}
     >
-      Deux visions complémentaires : usage public vs estimation fine.
+      Attention : ces outils mesurent uniquement les impacts de l'inférence.
     </div>
     <Footer />
   </div>
@@ -271,10 +312,10 @@ const Mesurer: Page = () => (
           github.com/lesommer/opencode-footprint-monitor
         </a>
       </div>
-      <ImagePlaceholder
-        hint="Capture d'écran d'un rapport d'empreinte généré par opencode-footprint-monitor"
-        width={620}
-        height={300}
+      <img
+        src={reportShot}
+        alt="Rapport d'empreinte généré par opencode-footprint-monitor"
+        style={{ width: 620, height: 'auto', border: `1px solid ${LINE}` }}
       />
     </div>
     <div
@@ -292,8 +333,8 @@ const Mesurer: Page = () => (
 );
 
 export const meta: SlideMeta = {
-  title: 'Vignette — Empreinte environnementale',
-  createdAt: '2026-10-02T05:13:17.520Z',
+  title: 'Vignette 02 — Empreinte environnementale',
+  createdAt: '2026-10-02T18:45:09.207Z',
 };
 
-export default [Pourquoi, Comparer, Mesurer] satisfies Page[];
+export default [TitleSlide, Pourquoi, Comparer, Mesurer] satisfies Page[];

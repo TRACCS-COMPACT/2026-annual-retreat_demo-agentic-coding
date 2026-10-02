@@ -167,6 +167,46 @@ const Row = ({
   </div>
 );
 
+const TitleSlide: Page = () => (
+  <div style={{ ...page, position: 'relative' }}>
+    <TopBar label="VIGNETTES FLASH — IA AGENTIQUE POUR LE CODE" />
+    <div
+      style={{
+        fontFamily: MONO,
+        fontSize: 26,
+        color: 'var(--osd-accent)',
+        letterSpacing: '0.14em',
+      }}
+    >
+      VIGNETTE 04 / 05
+    </div>
+    <h1
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 'var(--osd-size-hero)',
+        fontWeight: 500,
+        letterSpacing: '-0.02em',
+        lineHeight: 1.08,
+        margin: '28px 0 0',
+      }}
+    >
+      AGENTS.md
+    </h1>
+    <div
+      style={{
+        width: 96,
+        height: 4,
+        background: 'var(--osd-accent)',
+        margin: '48px 0 36px',
+      }}
+    />
+    <p style={{ fontSize: 38, lineHeight: 1.5, color: MUTED, margin: 0 }}>
+      Le README pour agents — démarrez petit, itérez.
+    </p>
+    <Footer />
+  </div>
+);
+
 const Standard: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="VIGNETTE 04 — AGENTS.md" />
@@ -216,7 +256,7 @@ const Lecons: Page = () => (
     <Heading>Ce qui marche, d'après 2 500 dépôts</Heading>
     <Steps>
       <Step>
-        <Row n="01" label="Commandes tôt" desc="tests, build, lint — exécutables, copiables" />
+        <Row n="01" label="Commandes d'abord" desc="tests, build, lint — exécutables, copiables" />
       </Step>
       <Step>
         <Row n="02" label="Exemples > explications" desc="un vrai extrait de code vaut trois paragraphes" />
@@ -225,7 +265,7 @@ const Lecons: Page = () => (
         <Row n="03" label="Frontières claires" desc="✅ toujours · ⚠️ demander · 🚫 jamais" />
       </Step>
       <Step>
-        <Row n="04" label="Stack précise" desc="versions et outils nommés, pas « un projet React »" />
+        <Row n="04" label="Stack précise" desc="versions et outils nommés explicitement" />
       </Step>
     </Steps>
     <Footer />
@@ -285,8 +325,8 @@ const Demarrer: Page = () => (
 );
 
 export const meta: SlideMeta = {
-  title: 'Vignette — AGENTS.md',
-  createdAt: '2026-10-02T05:14:25.443Z',
+  title: 'Vignette 04 — AGENTS.md',
+  createdAt: '2026-10-02T18:43:09.207Z',
 };
 
-export default [Standard, Lecons, Demarrer] satisfies Page[];
+export default [TitleSlide, Standard, Lecons, Demarrer] satisfies Page[];

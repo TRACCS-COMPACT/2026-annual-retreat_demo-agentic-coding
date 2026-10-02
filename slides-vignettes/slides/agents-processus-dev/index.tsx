@@ -1,5 +1,6 @@
-import { ImagePlaceholder, useSlidePageNumber } from '@open-slide/core';
+import { useSlidePageNumber } from '@open-slide/core';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
+import coderabbitShot from './assets/coderabbit-review.png';
 
 export const design: DesignSystem = {
   palette: { bg: '#ffffff', text: '#1a1a1a', accent: '#5088b8' },
@@ -177,12 +178,54 @@ const LinkLine = ({
   </a>
 );
 
+const TitleSlide: Page = () => (
+  <div style={{ ...page, position: 'relative' }}>
+    <TopBar label="VIGNETTES FLASH — IA AGENTIQUE POUR LE CODE" />
+    <div
+      style={{
+        fontFamily: MONO,
+        fontSize: 26,
+        color: 'var(--osd-accent)',
+        letterSpacing: '0.14em',
+      }}
+    >
+      VIGNETTE 05 / 05
+    </div>
+    <h1
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 'var(--osd-size-hero)',
+        fontWeight: 500,
+        letterSpacing: '-0.02em',
+        lineHeight: 1.08,
+        margin: '28px 0 0',
+      }}
+    >
+      Les agents dans le
+      <br />
+      processus de développement
+    </h1>
+    <div
+      style={{
+        width: 96,
+        height: 4,
+        background: 'var(--osd-accent)',
+        margin: '48px 0 36px',
+      }}
+    />
+    <p style={{ fontSize: 38, lineHeight: 1.5, color: MUTED, margin: 0 }}>
+      L'humain relit et décide.
+    </p>
+    <Footer />
+  </div>
+);
+
 const Carte: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
-    <TopBar label="VIGNETTE 05 — Dans le processus" />
+    <TopBar label="VIGNETTE 05 — Les agents dans le processus" />
     <Heading>Où les agents s'insèrent</Heading>
     <div style={{ display: 'flex', alignItems: 'center', gap: 20, marginTop: 64 }}>
-      <StepBox title="POSTE" desc="au quotidien, dans votre dépôt" />
+      <StepBox title="CODE" desc="au quotidien, dans votre dépôt" />
       <Arrow />
       <StepBox title="CI" desc="workflows, tests, issues → PR" />
       <Arrow />
@@ -206,20 +249,22 @@ const Carte: Page = () => (
 
 const Revue: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
-    <TopBar label="VIGNETTE 05 — Dans le processus" />
+    <TopBar label="VIGNETTE 05 — Les agents dans le processus" />
     <Heading>La revue de PR par agent</Heading>
     <div style={{ display: 'flex', gap: 96, marginTop: 48, alignItems: 'flex-start' }}>
-      <div style={{ flex: 1 }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignSelf: 'stretch' }}>
         <Bullet>CodeRabbit : relecture automatique de chaque PR — un pré-filtre utile</Bullet>
         <Bullet>GitHub Actions et GitLab CI peuvent appeler OpenCode directement</Bullet>
         <Bullet>Copilot coding agent : issue → PR → review, enchaîné</Bullet>
-        <LinkLine href="https://coderabbit.ai" label="coderabbit.ai" />
-        <LinkLine href="https://opencode.ai/docs/github/" label="opencode.ai/docs/github" />
+        <div style={{ marginTop: 'auto', paddingTop: 32 }}>
+          <LinkLine href="https://coderabbit.ai" label="coderabbit.ai" />
+          <LinkLine href="https://opencode.ai/docs/github/" label="opencode.ai/docs/github" />
+        </div>
       </div>
-      <ImagePlaceholder
-        hint="Capture d'écran d'une revue de PR par CodeRabbit (commentaires sur un diff)"
-        width={620}
-        height={380}
+      <img
+        src={coderabbitShot}
+        alt="Revue de PR par CodeRabbit"
+        style={{ width: 620, height: 'auto', border: `1px solid ${LINE}` }}
       />
     </div>
     <Footer />
@@ -228,10 +273,12 @@ const Revue: Page = () => (
 
 const Doc: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
-    <TopBar label="VIGNETTE 05 — Dans le processus" />
-    <Heading>La documentation, premier gain sûr</Heading>
+    <TopBar label="VIGNETTE 05 — Les agents dans le processus" />
+    <Heading>La documentation par agents</Heading>
     <div style={{ marginTop: 40 }}>
-      <Bullet>Tenir la doc à jour : le premier usage rentable et peu risqué</Bullet>
+      <Bullet>
+        La documentation : a "low-hanging fruit" — premier usage rentable et peu risqué
+      </Bullet>
       <Bullet>Un agent dédié — le pattern @docs-agent — lit le code, écrit la doc</Bullet>
     </div>
     <p
@@ -245,23 +292,13 @@ const Doc: Page = () => (
     >
       L'humain relit et décide.
     </p>
-    <div
-      style={{
-        marginTop: 48,
-        fontSize: 36,
-        fontWeight: 500,
-        color: 'var(--osd-accent)',
-      }}
-    >
-      → Retour au travail — à vos dépôts.
-    </div>
     <Footer />
   </div>
 );
 
 export const meta: SlideMeta = {
-  title: 'Vignette — Agents dans le processus',
-  createdAt: '2026-10-02T05:22:04.511Z',
+  title: 'Vignette 05 — Les agents dans le processus',
+  createdAt: '2026-10-02T18:42:09.207Z',
 };
 
-export default [Carte, Revue, Doc] satisfies Page[];
+export default [TitleSlide, Carte, Doc, Revue] satisfies Page[];

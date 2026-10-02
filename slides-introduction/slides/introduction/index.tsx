@@ -1,5 +1,4 @@
 import {
-  ImagePlaceholder,
   Step,
   Steps,
   useSlidePageNumber,
@@ -7,6 +6,7 @@ import {
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
 import type { ReactNode } from 'react';
 import opencodeShot from '@assets/opencode.png';
+import agentsShot from '@assets/opencode-agents.png';
 
 export const design: DesignSystem = {
   palette: { bg: '#ffffff', text: '#1a1a1a', accent: '#5088b8' },
@@ -82,20 +82,14 @@ const TopBar = ({ label }: { label: string }) => (
     }}
   >
     <div
-      style={{
-        fontSize: 30,
-        fontWeight: 500,
-        color: 'var(--osd-accent)',
-        letterSpacing: '0.16em',
-        textTransform: 'uppercase',
-      }}
+      style={{ fontSize: '45px', fontWeight: 500, color: 'var(--osd-accent)', letterSpacing: '0.16em', textTransform: 'uppercase' }}
     >
       {label}
     </div>
   </div>
 );
 
-const Heading = ({ children }: { children: string }) => (
+const Heading = ({ children }: { children: ReactNode }) => (
   <h2
     style={{
       fontFamily: 'var(--osd-font-display)',
@@ -143,8 +137,8 @@ const Bullet = ({ children }: { children: string }) => (
 
 const Item = ({ children }: { children: string }) => (
   <li style={{ display: 'flex', gap: 18, alignItems: 'baseline' }}>
-    <span style={{ color: 'var(--osd-accent)', fontSize: 26 }}>—</span>
-    <span style={{ fontSize: 28, lineHeight: 1.5 }}>{children}</span>
+    <span style={{ color: 'var(--osd-accent)', fontSize: 28 }}>—</span>
+    <span style={{ fontSize: 32, lineHeight: 1.5 }}>{children}</span>
   </li>
 );
 
@@ -202,7 +196,7 @@ const Block = ({ label, children }: { label: string; children: ReactNode }) => (
   <div>
     <div
       style={{
-        fontSize: 24,
+        fontSize: 28,
         fontWeight: 500,
         color: 'var(--osd-accent)',
         letterSpacing: '0.14em',
@@ -276,73 +270,58 @@ const PhaseBox = ({
   );
 };
 
-const LevelBox = ({ n, label }: { n: string; label: string }) => (
-  <div
-    style={{
-      flex: 1,
-      background: TINT,
-      border: `1px solid ${LINE}`,
-      borderTop: '4px solid var(--osd-accent)',
-      padding: '16px 20px',
-    }}
-  >
-    <div style={{ fontFamily: MONO, fontSize: 26, fontWeight: 600, color: 'var(--osd-accent)' }}>
-      {n}
-    </div>
-    <div style={{ fontSize: 22, fontWeight: 500, color: INK, marginTop: 8 }}>{label}</div>
-  </div>
-);
-
-const NumRow = ({ n, children }: { n: string; children: ReactNode }) => (
+const ProgRow = ({
+  n,
+  duree,
+  etape,
+  support,
+  href,
+}: {
+  n: string;
+  duree: string;
+  etape: string;
+  support: string;
+  href?: string;
+}) => (
   <div
     style={{
       display: 'flex',
       alignItems: 'baseline',
-      gap: 36,
-      padding: '22px 0',
+      gap: 32,
+      padding: '18px 0',
       borderBottom: `1px solid ${LINE}`,
     }}
   >
-    <span style={{ fontFamily: MONO, fontSize: 32, color: 'var(--osd-accent)' }}>{n}</span>
-    <span style={{ fontSize: 40, lineHeight: 1.5, letterSpacing: '-0.01em' }}>{children}</span>
+    <span style={{ fontFamily: MONO, fontSize: 26, color: 'var(--osd-accent)', width: 50 }}>
+      {n}
+    </span>
+    <span style={{ fontFamily: MONO, fontSize: 26, color: INK, width: 130 }}>{duree}</span>
+    <span style={{ flex: 1, fontSize: 28, lineHeight: 1.4, letterSpacing: '-0.01em' }}>
+      {etape}
+    </span>
+    {href ? (
+      <a
+        href={href}
+        target="_blank"
+        rel="noreferrer"
+        style={{
+          fontFamily: MONO,
+          fontSize: 24,
+          color: 'var(--osd-accent)',
+          textDecoration: 'none',
+          width: 320,
+        }}
+      >
+        {support}
+      </a>
+    ) : (
+      <span style={{ fontFamily: MONO, fontSize: 24, color: MUTED, width: 320 }}>
+        {support}
+      </span>
+    )}
   </div>
 );
 
-const LinkRow = ({
-  href,
-  title,
-  desc,
-}: {
-  href: string;
-  title: string;
-  desc: string;
-}) => (
-  <div
-    style={{
-      padding: '14px 0',
-      borderBottom: `1px solid ${LINE}`,
-      display: 'flex',
-      flexDirection: 'column',
-      gap: 8,
-    }}
-  >
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      style={{
-        fontSize: 32,
-        fontWeight: 500,
-        color: 'var(--osd-accent)',
-        textDecoration: 'none',
-        letterSpacing: '-0.01em',
-      }}
-    >
-      {title}
-    </a>
-    <span style={{ fontSize: 24, lineHeight: 1.4, color: MUTED }}>{desc}</span>
-  </div>
-);
 
 const Cover: Page = () => (
   <div
@@ -413,14 +392,14 @@ const Cover: Page = () => (
 const Objectifs: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="01 — Pourquoi cette session" />
-    <Heading>Trois objectifs, une après-midi</Heading>
+    <Heading>Trois objectifs pour 3 h de travail</Heading>
     <Steps>
       <Step>
         <div style={{ display: 'flex', gap: 64, marginTop: 64 }}>
           <div style={{ flex: 1 }}>
             <div style={{ fontSize: 44, fontWeight: 500 }}>Comprendre</div>
             <div style={{ fontSize: 26, lineHeight: 1.4, color: MUTED, marginTop: 12 }}>
-              les concepts : LLM, agent, contexte, workflow
+              les concepts de base
             </div>
           </div>
           <div style={{ flex: 1 }}>
@@ -439,8 +418,15 @@ const Objectifs: Page = () => (
       </Step>
       <Step>
         <div style={{ marginTop: 64 }}>
+          <p style={{ fontSize: 38, lineHeight: 1.4, margin: '0 0 28px' }}>
+            Apprendre à coder avec des agents, de manière robuste et fiable.
+          </p>
+        </div>
+      </Step>
+      <Step>
+        <div style={{ marginTop: 40 }}>
           <Card>
-            <p style={{ fontSize: 34, lineHeight: 1.45, fontWeight: 500, margin: 0 }}>
+            <p style={{ fontSize: 40, lineHeight: 1.45, fontWeight: 500, margin: 0 }}>
               Méta : ces slides — et le dépôt qui les héberge — ont été produites avec un
               agent.
             </p>
@@ -512,10 +498,9 @@ const Agent: Page = () => (
         color: INK,
       }}
     >
-      LLM <span style={{ color: 'var(--osd-accent)' }}>+</span> contexte / mémoire{' '}
-      <span style={{ color: 'var(--osd-accent)' }}>+</span> tâche{' '}
-      <span style={{ color: 'var(--osd-accent)' }}>+</span> rôle{' '}
-      <span style={{ color: 'var(--osd-accent)' }}>+</span> outils
+      LLM <span style={{ color: 'var(--osd-accent)' }}>+</span> instructions (rôle, tâche){' '}
+      <span style={{ color: 'var(--osd-accent)' }}>+</span> contexte / mémoire{' '}
+      <span style={{ color: 'var(--osd-accent)' }}>+</span> outils (fichiers, shell, git)
     </div>
     <Steps>
       <Step>
@@ -563,24 +548,36 @@ const Agent: Page = () => (
 const EnPratique: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="04 — En pratique" />
-    <Heading>Deux ingrédients : un modèle, un harnais</Heading>
+    <Heading>
+      Deux ingrédients : un{' '}
+      <span style={{ color: 'var(--osd-accent)' }}>modèle</span>, un{' '}
+      <span style={{ color: 'var(--osd-accent)' }}>harnais</span>
+    </Heading>
     <div style={{ display: 'flex', gap: 96, marginTop: 56, alignItems: 'flex-start' }}>
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 36 }}>
-        <Block label="L'accès aux modèles">
-          <Item>API / SDK + clé d'API</Item>
-          <Item>facturation au token ou forfaitaire</Item>
-          <Item>Cortecs — passerelle européenne, RGPD</Item>
-        </Block>
-        <Block label="Le harnais">
-          <Item>VS Code + Kilo Code — l'IDE</Item>
-          <Item>OpenCode — le terminal</Item>
-          <Item>aussi : Copilot, Claude Code, Continue…</Item>
-        </Block>
-        <Card>
-          <p style={{ fontSize: 30, lineHeight: 1.4, fontWeight: 500, margin: 0 }}>
-            Notre choix aujourd'hui : OpenCode · VS Code + Kilo Code
-          </p>
-        </Card>
+        <Steps>
+          <Step>
+            <Block label="L'accès aux modèles">
+              <Item>API / SDK + clé d'API</Item>
+              <Item>facturation au token ou forfaitaire</Item>
+              <Item>Cortecs — passerelle européenne, RGPD</Item>
+            </Block>
+          </Step>
+          <Step>
+            <Block label="Le harnais">
+              <Item>VS Code + Kilo Code — l'IDE</Item>
+              <Item>OpenCode — le terminal</Item>
+              <Item>aussi : Copilot, Claude Code, Continue…</Item>
+            </Block>
+          </Step>
+          <Step>
+            <Card>
+              <p style={{ fontSize: 30, lineHeight: 1.4, fontWeight: 500, margin: 0 }}>
+                Notre choix aujourd'hui : OpenCode · VS Code + Kilo Code
+              </p>
+            </Card>
+          </Step>
+        </Steps>
       </div>
       <img
         src={opencodeShot}
@@ -654,7 +651,7 @@ const Contexte: Page = () => (
           <div>
             <div style={{ fontSize: 30, fontWeight: 500 }}>Notes structurées</div>
             <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
-              AGENTS.md et fichiers de plan — créés via /init
+              AGENTS.md, PLANS.md, DESIGN.md — créés via /init
             </div>
           </div>
           <div>
@@ -710,38 +707,55 @@ const Workflow: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="06 — Le workflow typique" />
     <Heading>Trois temps, une boucle</Heading>
-    <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginTop: 56 }}>
+    <div style={{ display: 'flex', alignItems: 'center', gap: 24, marginTop: 40 }}>
       <PhaseBox title="PLAN" desc="ce qu'il va faire, et comment" />
       <Arrow />
       <PhaseBox title="REVUE" desc="vous relisez, vous ajustez" tone="human" />
       <Arrow />
       <PhaseBox title="BUILD" desc="il exécute, vous vérifiez" />
     </div>
-    <div style={{ display: 'flex', gap: 96, marginTop: 56, alignItems: 'flex-start' }}>
-      <div style={{ flex: 1 }}>
-        <div style={{ fontFamily: MONO, fontSize: 30, color: INK }}>
-          prompt <span style={{ color: 'var(--osd-accent)' }}>→</span> think{' '}
-          <span style={{ color: 'var(--osd-accent)' }}>→</span> act{' '}
-          <span style={{ color: 'var(--osd-accent)' }}>→</span> observe
-        </div>
-        <p
-          style={{
-            fontSize: 'var(--osd-size-body)',
-            lineHeight: 1.5,
-            color: MUTED,
-            margin: '32px 0 0',
-            maxWidth: 880,
-          }}
-        >
-          Parlez-lui comme à un·e collègue junior : contexte précis, petites tâches,
-          feedback régulier.
-        </p>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row-reverse',
+        gap: 96,
+        marginTop: 40,
+        alignItems: 'flex-start',
+      }}
+    >
+      <div style={{ width: 620, flexShrink: 0 }}>
+        <Steps>
+          <Step>
+            <img
+              src={agentsShot}
+              alt="Agents dans OpenCode"
+              style={{ width: 620, height: 'auto', lineHeight: '0.8' }}
+            />
+          </Step>
+        </Steps>
       </div>
-      <ImagePlaceholder
-        hint="Capture d'écran du mode plan d'OpenCode (TUI)"
-        width={620}
-        height={360}
-      />
+      <div style={{ flex: 1 }}>
+        <Steps>
+          <Step>
+            <div style={{ fontFamily: MONO, fontSize: 30, color: INK }}>
+              réfléchir <span style={{ color: 'var(--osd-accent)' }}>→</span> agir{' '}
+              <span style={{ color: 'var(--osd-accent)' }}>→</span> observer
+            </div>
+            <p
+              style={{
+                fontSize: 'var(--osd-size-body)',
+                lineHeight: 1.5,
+                color: MUTED,
+                margin: '32px 0 0',
+                maxWidth: 880,
+              }}
+            >
+              Parlez-lui comme à un·e collègue junior : contexte précis, petites tâches,
+              feedback régulier.
+            </p>
+          </Step>
+        </Steps>
+      </div>
     </div>
     <Footer />
   </div>
@@ -781,60 +795,58 @@ const Deroule: Page = () => (
     <p style={{ fontSize: 28, lineHeight: 1.4, color: MUTED, margin: '20px 0 0', maxWidth: 1500 }}>
       Deux temps de 60 minutes, séparés par une pause — restitution collective en clôture.
     </p>
-    <div
-      style={{
-        marginTop: 32,
-        fontSize: 24,
-        fontWeight: 500,
-        color: 'var(--osd-accent)',
-        letterSpacing: '0.12em',
-        textTransform: 'uppercase',
-      }}
-    >
-      Phase 1 · 60 min — Climat du Poët-Laval
+    <div style={{ marginTop: 40 }}>
+      <div
+        style={{
+          display: 'flex',
+          gap: 32,
+          padding: '12px 0',
+          borderBottom: `2px solid ${LINE}`,
+          fontFamily: MONO,
+          fontSize: 22,
+          color: 'var(--osd-accent)',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
+        }}
+      >
+        <span style={{ width: 50 }}>#</span>
+        <span style={{ width: 130 }}>Durée</span>
+        <span style={{ flex: 1 }}>Étape</span>
+        <span style={{ width: 320 }}>Support</span>
+      </div>
+      <ProgRow
+        n="1"
+        duree="15 min"
+        etape="Introduction — concepts de base : LLM, agent, contexte, workflow"
+        support="slides-introduction/"
+      />
+      <ProgRow
+        n="2"
+        duree="15 min"
+        etape="Mise en place technique : Cortecs, puis OpenCode ou VS Code + Kilo Code"
+        support="SETUP.md"
+      />
+      <ProgRow
+        n="3"
+        duree="60 min"
+        etape="Atelier guidé — le climat du Poët-Laval, dont 15 min de débrief"
+        support="poet-laval-climate"
+        href="https://github.com/TRACCS-COMPACT/poet-laval-climate"
+      />
+      <ProgRow n="4" duree="15 min" etape="Pause" support="—" />
+      <ProgRow
+        n="5"
+        duree="60 min"
+        etape="Travail libre — votre vrai problème, avec plans et AGENTS.md"
+        support="—"
+      />
+      <ProgRow
+        n="6"
+        duree="15 min"
+        etape="Restitution — chacun·e décrit son travail avec l'agent"
+        support="—"
+      />
     </div>
-    <div style={{ display: 'flex', gap: 20, marginTop: 16 }}>
-      <LevelBox n="N0" label="Données" />
-      <LevelBox n="N1" label="Climat actuel" />
-      <LevelBox n="N2" label="Tendance" />
-      <LevelBox n="N3" label="Indicateur" />
-      <LevelBox n="N4" label="Fiche" />
-    </div>
-    <div style={{ marginTop: 24 }}>
-      <Bullet>Une seule étape à la fois : demandez, puis lisez</Bullet>
-      <Bullet>Lisez le code et le résultat avant de continuer</Bullet>
-      <Bullet>Répondez aux questions de vérification de chaque niveau</Bullet>
-    </div>
-    <div
-      style={{
-        marginTop: 32,
-        fontSize: 24,
-        fontWeight: 500,
-        color: PURPLE,
-        letterSpacing: '0.12em',
-        textTransform: 'uppercase',
-      }}
-    >
-      Phase 2 · 60 min — Votre problème
-    </div>
-    <div style={{ marginTop: 16, fontSize: 30, fontWeight: 500 }}>
-      Votre vrai problème de développement, avec plans et AGENTS.md
-    </div>
-    <a
-      href="https://github.com/TRACCS-COMPACT/poet-laval-climate"
-      target="_blank"
-      rel="noreferrer"
-      style={{
-        fontFamily: MONO,
-        fontSize: 28,
-        color: 'var(--osd-accent)',
-        textDecoration: 'none',
-        marginTop: 36,
-        display: 'inline-block',
-      }}
-    >
-      github.com/TRACCS-COMPACT/poet-laval-climate
-    </a>
     <Footer />
   </div>
 );
@@ -843,46 +855,24 @@ const Retenir: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="09 — À retenir" />
     <Heading>Trois choses à retenir</Heading>
-    <div style={{ marginTop: 40 }}>
-      <NumRow n="01">
-        L'agent est un LLM dans une boucle —{' '}
-        <strong style={{ color: PURPLE, fontWeight: 600 }}>la vérification reste la vôtre</strong>
-      </NumRow>
-      <NumRow n="02">
-        Le contexte est la ressource clé — nourrissez-le, économisez-le
-      </NumRow>
-      <NumRow n="03">
-        Petites tâches, plan avant build, hygiène git — la discipline paie
-      </NumRow>
-    </div>
     <div
       style={{
-        marginTop: 32,
-        fontSize: 24,
-        fontWeight: 500,
-        color: 'var(--osd-accent)',
-        letterSpacing: '0.12em',
-        textTransform: 'uppercase',
+        marginTop: 72,
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        gap: 56,
       }}
     >
-      Ressources disponibles
-    </div>
-    <div style={{ marginTop: 12 }}>
-      <LinkRow
-        href="https://github.com/TRACCS-COMPACT/poet-laval-climate"
-        title="poet-laval-climate"
-        desc="L'atelier : données ERA5 et stations Météo-France, niveaux 0 → 4"
-      />
-      <LinkRow
-        href="https://github.com/TRACCS-COMPACT/2026-annual-retreat_demo-agentic-coding"
-        title="Ce dépôt — SETUP.md"
-        desc="Mise en place technique : Cortecs, OpenCode, VS Code + Kilo Code"
-      />
-      <LinkRow
-        href="https://opencode.ai/docs/"
-        title="opencode.ai/docs"
-        desc="Documentation OpenCode : /init, /models, permissions"
-      />
+      <div style={{ fontSize: 56, lineHeight: 1.4, letterSpacing: '-0.01em' }}>
+        agent = LLM + contexte + interactions
+      </div>
+      <div style={{ fontSize: 56, lineHeight: 1.4, letterSpacing: '-0.01em' }}>
+        Le contexte est la ressource clef à contrôler
+      </div>
+      <div style={{ fontSize: 56, lineHeight: 1.4, letterSpacing: '-0.01em' }}>
+        Petites tâches, plan avant build, hygiène git
+      </div>
     </div>
     <Footer />
   </div>

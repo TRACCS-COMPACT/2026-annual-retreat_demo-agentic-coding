@@ -1,5 +1,6 @@
-import { ImagePlaceholder, useSlidePageNumber } from '@open-slide/core';
+import { useSlidePageNumber } from '@open-slide/core';
 import type { DesignSystem, Page, SlideMeta, SlideTransition } from '@open-slide/core';
+import modelsShot from './assets/models-selection.png';
 
 export const design: DesignSystem = {
   palette: { bg: '#ffffff', text: '#1a1a1a', accent: '#5088b8' },
@@ -71,13 +72,7 @@ const TopBar = ({ label }: { label: string }) => (
     }}
   >
     <div
-      style={{
-        fontSize: 30,
-        fontWeight: 500,
-        color: 'var(--osd-accent)',
-        letterSpacing: '0.16em',
-        textTransform: 'uppercase',
-      }}
+      style={{ fontSize: '45px', fontWeight: 500, color: 'var(--osd-accent)', letterSpacing: '0.16em', textTransform: 'uppercase' }}
     >
       {label}
     </div>
@@ -162,6 +157,46 @@ const ScaleBox = ({ title, desc, hot }: { title: string; desc: string; hot?: boo
   </div>
 );
 
+const TitleSlide: Page = () => (
+  <div style={{ ...page, position: 'relative' }}>
+    <TopBar label="VIGNETTES FLASH — IA AGENTIQUE POUR LE CODE" />
+    <div
+      style={{
+        fontFamily: MONO,
+        fontSize: 26,
+        color: 'var(--osd-accent)',
+        letterSpacing: '0.14em',
+      }}
+    >
+      VIGNETTE 01 / 05
+    </div>
+    <h1
+      style={{
+        fontFamily: 'var(--osd-font-display)',
+        fontSize: 'var(--osd-size-hero)',
+        fontWeight: 500,
+        letterSpacing: '-0.02em',
+        lineHeight: 1.08,
+        margin: '28px 0 0',
+      }}
+    >
+      Le bon modèle
+    </h1>
+    <div
+      style={{
+        width: 96,
+        height: 4,
+        background: 'var(--osd-accent)',
+        margin: '48px 0 36px',
+      }}
+    />
+    <p style={{ fontSize: 38, lineHeight: 1.5, color: MUTED, margin: 0 }}>
+      Commencer petit, monter si nécessaire.
+    </p>
+    <Footer />
+  </div>
+);
+
 const Cover: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="VIGNETTE 01 — Le bon modèle" />
@@ -169,7 +204,7 @@ const Cover: Page = () => (
     <div style={{ display: 'flex', gap: 24, marginTop: 56 }}>
       <ScaleBox title="PETIT" desc="flash / léger — la plupart des tâches" hot />
       <ScaleBox title="MOYEN" desc="quand la tâche résiste" />
-      <ScaleBox title="FRONTALIER" desc="raiment difficile — rarement nécessaire" />
+      <ScaleBox title="FRONTALIER" desc="Vraiment difficile — rarement nécessaire" />
     </div>
     <div style={{ marginTop: 56 }}>
       <Bullet>Coût, latence et empreinte varient du simple au centuple</Bullet>
@@ -180,7 +215,7 @@ const Cover: Page = () => (
 );
 
 const Autoregule: Page = () => (
-  <div style={{ ...page, position: 'relative' }}>
+  <div style={{ ...page, position: 'relative', paddingTop: 120 }}>
     <TopBar label="VIGNETTE 01 — Le bon modèle" />
     <Heading>L'agent peut choisir lui-même</Heading>
     <div style={{ marginTop: 44 }}>
@@ -214,10 +249,10 @@ const Autoregule: Page = () => (
           catalogue : cortecs.ai/serverlessModels
         </div>
       </div>
-      <ImagePlaceholder
-        hint="Capture d'écran de la sélection de modèle dans OpenCode (/models)"
-        width={620}
-        height={360}
+      <img
+        src={modelsShot}
+        alt="Sélection de modèle dans OpenCode (/models)"
+        style={{ width: 540, height: 'auto', border: `1px solid ${LINE}` }}
       />
     </div>
     <Cue>Retour au travail — essayez /models maintenant.</Cue>
@@ -226,8 +261,8 @@ const Autoregule: Page = () => (
 );
 
 export const meta: SlideMeta = {
-  title: 'Vignette — Choisir le bon modèle',
-  createdAt: '2026-10-02T05:12:44.490Z',
+  title: 'Vignette 01 — Le bon modèle',
+  createdAt: '2026-10-02T18:46:09.207Z',
 };
 
-export default [Cover, Autoregule] satisfies Page[];
+export default [TitleSlide, Cover, Autoregule] satisfies Page[];
