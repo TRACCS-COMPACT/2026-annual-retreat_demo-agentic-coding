@@ -779,7 +779,7 @@ const Deroule: Page = () => (
     <TopBar label="08 — Le programme" />
     <Heading>L'atelier — et après</Heading>
     <p style={{ fontSize: 28, lineHeight: 1.4, color: MUTED, margin: '20px 0 0', maxWidth: 1500 }}>
-      Deux temps de 60 minutes : atelier guidé, puis votre propre problème de développement.
+      Deux temps de 60 minutes, séparés par une pause — restitution collective en clôture.
     </p>
     <div
       style={{

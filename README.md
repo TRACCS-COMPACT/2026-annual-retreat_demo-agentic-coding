@@ -13,7 +13,9 @@ sur un problème guidé → **démarrer** sur un vrai problème de développemen
 | 1 | 15 min | **Introduction — concepts de base** : LLM, agent, contexte, workflow | `slides-introduction/` |
 | 2 | 15 min | **Mise en place technique** : compte Cortecs, puis OpenCode (terminal) ou VS Code + Kilo Code (IDE) | [`SETUP.md`](./SETUP.md) |
 | 3 | 60 min | **Atelier guidé — le climat du Poët-Laval** : étude avec un agent, pas à pas (niveaux 0 → 4), dont **15 min de débrief** | [poet-laval-climate](https://github.com/TRACCS-COMPACT/poet-laval-climate) |
-| 4 | 60 min | **Travail libre — votre vrai problème** : une tâche de votre dev actuelle, avec plans et `AGENTS.md` | Référents : [`SETUP.md`](./SETUP.md) |
+| 4 | 15 min | **Pause** | — |
+| 5 | 60 min | **Travail libre — votre vrai problème** : une tâche de votre dev actuelle, avec plans et `AGENTS.md` | Référents : [`SETUP.md`](./SETUP.md) |
+| 6 | 15 min | **Restitution** : chacun·e décrit son travail avec l'agent et ses premières impressions | — |
 
 > **Vignettes flash (~3 min)** : intercalées au fil de la session par les animateurs —
 > deck `slides-vignettes/`.
