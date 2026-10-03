@@ -456,6 +456,18 @@ const Llm: Page = () => (
         texte <span style={{ color: 'var(--osd-accent)' }}>→</span> tokens{' '}
         <span style={{ color: 'var(--osd-accent)' }}>→</span> prédiction du token suivant
       </div>
+      <div
+        style={{
+          fontSize: 24,
+          lineHeight: 1.4,
+          color: MUTED,
+          marginTop: 16,
+          maxWidth: 1100,
+        }}
+      >
+        Un token ≈ un fragment de mot (4 caractères en moyenne) — l'unité que le modèle
+        lit et prédit.
+      </div>
     </div>
     <Steps>
       <Step>
@@ -471,17 +483,19 @@ const Llm: Page = () => (
           Pas de mémoire entre deux appels : tout passe par la fenêtre de contexte, finie
         </Bullet>
       </Step>
+      <Step>
+        <div
+          style={{
+            marginTop: 56,
+            fontSize: 34,
+            fontWeight: 500,
+            color: PURPLE,
+          }}
+        >
+          D'où la règle : la vérification reste humaine.
+        </div>
+      </Step>
     </Steps>
-    <div
-      style={{
-        marginTop: 56,
-        fontSize: 34,
-        fontWeight: 500,
-        color: PURPLE,
-      }}
-    >
-      D'où la règle : la vérification reste humaine.
-    </div>
     <Footer />
   </div>
 );
@@ -641,63 +655,75 @@ const Contexte: Page = () => (
             — la fenêtre de contexte.
           </p>
         </div>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 28, marginTop: 32 }}>
-          <div>
-            <div style={{ fontSize: 30, fontWeight: 500 }}>Compaction</div>
-            <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
-              résumer les longues sessions, garder l'essentiel
+        <Steps>
+          <Step>
+            <div>
+              <div style={{ fontSize: 30, fontWeight: 500 }}>Compaction</div>
+              <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
+                résumer les longues sessions, garder l'essentiel
+              </div>
             </div>
-          </div>
-          <div>
-            <div style={{ fontSize: 30, fontWeight: 500 }}>Notes structurées</div>
-            <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
-              AGENTS.md, PLANS.md, DESIGN.md — créés via /init
+          </Step>
+          <Step>
+            <div style={{ marginTop: 28 }}>
+              <div style={{ fontSize: 30, fontWeight: 500 }}>Notes structurées</div>
+              <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
+                AGENTS.md, PLANS.md, DESIGN.md — créés via /init
+              </div>
             </div>
-          </div>
-          <div>
-            <div style={{ fontSize: 30, fontWeight: 500 }}>Le bon niveau de détail</div>
-            <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
-              un plan ni trop vague, ni trop verbeux
+          </Step>
+          <Step>
+            <div style={{ marginTop: 28 }}>
+              <div style={{ fontSize: 30, fontWeight: 500 }}>Le bon niveau de détail</div>
+              <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
+                un plan ni trop vague, ni trop verbeux
+              </div>
             </div>
-          </div>
-          <div>
-            <div style={{ fontSize: 30, fontWeight: 500 }}>Sous-agents</div>
-            <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
-              découper la tâche, spécialiser, cloisonner le contexte
+          </Step>
+          <Step>
+            <div style={{ marginTop: 28 }}>
+              <div style={{ fontSize: 30, fontWeight: 500 }}>Sous-agents</div>
+              <div style={{ fontSize: 24, lineHeight: 1.4, color: MUTED, marginTop: 6 }}>
+                découper la tâche, spécialiser, cloisonner le contexte
+              </div>
             </div>
-          </div>
-        </div>
+          </Step>
+        </Steps>
       </div>
-      <div
-        style={{
-          width: 620,
-          background: TINT,
-          border: `1px solid ${LINE}`,
-          borderTop: '4px solid var(--osd-accent)',
-          padding: '36px 44px',
-        }}
-      >
-        <CodeLine tone="heading"># AGENTS.md</CodeLine>
-        <div style={{ height: 20 }} />
-        <CodeLine tone="rule">## Commandes</CodeLine>
-        <CodeLine>- tests : pytest -v</CodeLine>
-        <CodeLine>- lint : ruff check .</CodeLine>
-        <div style={{ height: 20 }} />
-        <CodeLine tone="rule">## Règles</CodeLine>
-        <CodeLine>- ✅ toujours relire le diff</CodeLine>
-        <CodeLine>- ⚠️ demander avant un changement lourd</CodeLine>
-        <CodeLine>- 🚫 jamais de secrets</CodeLine>
-        <div
-          style={{
-            height: 1,
-            background: SKY,
-            margin: '24px 0',
-          }}
-        />
-        <div style={{ fontFamily: MONO, fontSize: 22, color: MUTED }}>
-          un écran, pas un manuel — vivant, itéré
-        </div>
-      </div>
+      <Steps>
+        <Step>
+          <div
+            style={{
+              width: 620,
+              background: TINT,
+              border: `1px solid ${LINE}`,
+              borderTop: '4px solid var(--osd-accent)',
+              padding: '36px 44px',
+            }}
+          >
+            <CodeLine tone="heading"># AGENTS.md</CodeLine>
+            <div style={{ height: 20 }} />
+            <CodeLine tone="rule">## Commandes</CodeLine>
+            <CodeLine>- tests : pytest -v</CodeLine>
+            <CodeLine>- lint : ruff check .</CodeLine>
+            <div style={{ height: 20 }} />
+            <CodeLine tone="rule">## Règles</CodeLine>
+            <CodeLine>- ✅ toujours relire le diff</CodeLine>
+            <CodeLine>- ⚠️ demander avant un changement lourd</CodeLine>
+            <CodeLine>- 🚫 jamais de secrets</CodeLine>
+            <div
+              style={{
+                height: 1,
+                background: SKY,
+                margin: '24px 0',
+              }}
+            />
+            <div style={{ fontFamily: MONO, fontSize: 22, color: MUTED }}>
+              un écran, pas un manuel — vivant, itéré
+            </div>
+          </div>
+        </Step>
+      </Steps>
     </div>
     <Footer />
   </div>
@@ -791,7 +817,7 @@ const Guardrails: Page = () => (
 const Deroule: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="08 — Le programme" />
-    <Heading>L'atelier — et après</Heading>
+    <Heading>L'atelier d'aujourd'hui</Heading>
     <p style={{ fontSize: 28, lineHeight: 1.4, color: MUTED, margin: '20px 0 0', maxWidth: 1500 }}>
       Deux temps de 60 minutes, séparés par une pause — restitution collective en clôture.
     </p>
@@ -865,7 +891,7 @@ const Retenir: Page = () => (
       }}
     >
       <div style={{ fontSize: 56, lineHeight: 1.4, letterSpacing: '-0.01em' }}>
-        agent = LLM + contexte + interactions
+        Agent = LLM + instructions + contexte + outils
       </div>
       <div style={{ fontSize: 56, lineHeight: 1.4, letterSpacing: '-0.01em' }}>
         Le contexte est la ressource clef à contrôler

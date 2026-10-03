@@ -269,4 +269,50 @@ export const meta: SlideMeta = {
   createdAt: '2026-10-02T18:44:09.207Z',
 };
 
-export default [TitleSlide, Maison, Reflexes] satisfies Page[];
+const DesignDoc: Page = () => (
+  <div style={{ ...page, position: 'relative' }}>
+    <TopBar label="VIGNETTE 03 — Git et agents" />
+    <Heading>Le design document — DESIGN.md</Heading>
+    <div style={{ marginTop: 40 }}>
+      <Bullet>Un document dans docs/ qui décrit l'architecture et les choix</Bullet>
+      <Bullet>Maintenu en phase avec le code : chaque changement passe par le doc</Bullet>
+      <Bullet>Sert de contexte aux futurs agents — la mémoire longue du dépôt</Bullet>
+    </div>
+    <div
+      style={{
+        fontFamily: MONO,
+        fontSize: 26,
+        lineHeight: 1.7,
+        background: TINT,
+        borderLeft: '4px solid var(--osd-accent)',
+        padding: '24px 32px',
+        marginTop: 44,
+        display: 'inline-block',
+      }}
+    >
+      docs/DESIGN.md
+      <br />
+      <span style={{ color: MUTED }}>- objectif du module</span>
+      <br />
+      <span style={{ color: MUTED }}>- choix d'implémentation</span>
+      <br />
+      <span style={{ color: MUTED }}>- interfaces et contraintes</span>
+    </div>
+    <div style={{ marginTop: 40, fontFamily: MONO, fontSize: 24 }}>
+      <a
+        href="https://arxiv.org/abs/2609.05364"
+        target="_blank"
+        rel="noreferrer"
+        style={{
+          color: 'var(--osd-accent)',
+          textDecoration: 'none',
+        }}
+      >
+        ouverture : arxiv.org/abs/2609.05364 — Design Docs Are All You Need
+      </a>
+    </div>
+    <Footer />
+  </div>
+);
+
+export default [TitleSlide, Maison, Reflexes, DesignDoc] satisfies Page[];

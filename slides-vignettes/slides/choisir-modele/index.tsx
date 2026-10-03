@@ -128,7 +128,7 @@ const Bullet = ({ children }: { children: string }) => (
 const Cue = ({ children }: { children: string }) => (
   <div
     style={{
-      marginTop: 56,
+      marginTop: 40,
       fontSize: 36,
       fontWeight: 500,
       color: 'var(--osd-accent)',
@@ -138,7 +138,17 @@ const Cue = ({ children }: { children: string }) => (
   </div>
 );
 
-const ScaleBox = ({ title, desc, hot }: { title: string; desc: string; hot?: boolean }) => (
+const ScaleBox = ({
+  title,
+  desc,
+  examples,
+  hot,
+}: {
+  title: string;
+  desc: string;
+  examples: string;
+  hot?: boolean;
+}) => (
   <div
     style={{
       flex: 1,
@@ -153,6 +163,17 @@ const ScaleBox = ({ title, desc, hot }: { title: string; desc: string; hot?: boo
     </div>
     <div style={{ fontSize: 22, lineHeight: 1.4, color: MUTED, marginTop: 10 }}>
       {desc}
+    </div>
+    <div
+      style={{
+        fontFamily: MONO,
+        fontSize: 19,
+        lineHeight: 1.5,
+        color: 'var(--osd-accent)',
+        marginTop: 12,
+      }}
+    >
+      {examples}
     </div>
   </div>
 );
@@ -202,9 +223,22 @@ const Cover: Page = () => (
     <TopBar label="VIGNETTE 01 — Le bon modèle" />
     <Heading>Commencer petit, monter si nécessaire</Heading>
     <div style={{ display: 'flex', gap: 24, marginTop: 56 }}>
-      <ScaleBox title="PETIT" desc="flash / léger — la plupart des tâches" hot />
-      <ScaleBox title="MOYEN" desc="quand la tâche résiste" />
-      <ScaleBox title="FRONTALIER" desc="Vraiment difficile — rarement nécessaire" />
+      <ScaleBox
+        title="PETIT"
+        desc="flash / léger — la plupart des tâches"
+        examples="ex. GLM 5.3 Flash, Qwen 3.8 Flash Next"
+        hot
+      />
+      <ScaleBox
+        title="MOYEN"
+        desc="à la frontière — quand la tâche résiste"
+        examples="ex. GLM 5.3, Mistral Medium 3.5"
+      />
+      <ScaleBox
+        title="FRONTALIER"
+        desc="Vraiment difficile — rarement nécessaire"
+        examples="ex. Claude Opus 5.5, GPT 6 Sol"
+      />
     </div>
     <div style={{ marginTop: 56 }}>
       <Bullet>Coût, latence et empreinte varient du simple au centuple</Bullet>
@@ -215,10 +249,10 @@ const Cover: Page = () => (
 );
 
 const Autoregule: Page = () => (
-  <div style={{ ...page, position: 'relative', paddingTop: 120 }}>
+  <div style={{ ...page, position: 'relative' }}>
     <TopBar label="VIGNETTE 01 — Le bon modèle" />
     <Heading>L'agent peut choisir lui-même</Heading>
-    <div style={{ marginTop: 44 }}>
+    <div style={{ marginTop: 32 }}>
       <div
         style={{
           fontFamily: MONO,
@@ -252,7 +286,7 @@ const Autoregule: Page = () => (
       <img
         src={modelsShot}
         alt="Sélection de modèle dans OpenCode (/models)"
-        style={{ width: 540, height: 'auto', border: `1px solid ${LINE}` }}
+        style={{ width: 460, height: 'auto', border: `1px solid ${LINE}` }}
       />
     </div>
     <Cue>Retour au travail — essayez /models maintenant.</Cue>

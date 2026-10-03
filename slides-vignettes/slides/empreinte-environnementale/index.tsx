@@ -205,7 +205,7 @@ const TitleSlide: Page = () => (
       }}
     />
     <p style={{ fontSize: 38, lineHeight: 1.5, color: MUTED, margin: 0 }}>
-      Mesurer, c'est déjà optimiser.
+      Mesurer, pour un usage responsable.
     </p>
     <Footer />
   </div>
@@ -232,7 +232,7 @@ const Pourquoi: Page = () => (
         <Bullet>Les boucles, outils et relectures multiplient les tokens consommés</Bullet>
       </Step>
       <Step>
-        <Bullet>Impact : énergie, CO2, eau, matériaux — tout se mesure</Bullet>
+        <Bullet>Impact significatif : énergie, carbone, eau, matériaux</Bullet>
       </Step>
       <Step>
         <Bullet>Le choix du modèle est le premier levier (voir vignette 01)</Bullet>
@@ -261,12 +261,18 @@ const Comparer: Page = () => (
     <div
       style={{
         marginTop: 48,
-        fontSize: 34,
+        fontSize: 30,
         fontWeight: 500,
+        lineHeight: 1.5,
         color: 'var(--osd-accent)',
       }}
     >
-      Attention : ces outils mesurent uniquement les impacts de l'inférence.
+      Attention :
+      <br />
+      — ces outils mesurent uniquement les impacts de l'inférence.
+      <br />
+      — et ne prennent pas en compte les effets indirects (ex. pour nous : + de calcul
+      HPC)
     </div>
     <Footer />
   </div>
@@ -275,7 +281,7 @@ const Comparer: Page = () => (
 const Mesurer: Page = () => (
   <div style={{ ...page, position: 'relative' }}>
     <TopBar label="VIGNETTE 02 — Empreinte environnementale" />
-    <Heading>Mesurer vos propres sessions</Heading>
+    <Heading>Mesurer, pour un usage responsable</Heading>
     <div style={{ display: 'flex', gap: 96, marginTop: 48, alignItems: 'flex-start' }}>
       <div style={{ flex: 1 }}>
         <div
